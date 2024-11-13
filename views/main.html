@@ -1,0 +1,125 @@
+<div class="main-container p-4 lg:p-14">
+    <!-- p-5 = padding: 1.25rem; zaś na osi x w poziomie 0 -->
+    <!-- tytuł -->
+    <div class="p-5 px0 justify-center">
+        <!-- mamy tu większy tekst 4xl - font-size: 2.25rem; kolor dodatkowy, pogrubiony, podniesiony do wielkich liter i z cieniem. -->
+        <h1 class="text-4xl font-bold uppercase title-shadow bg-title">Ekstraklasa</h1>
+    </div>
+    <!-- elementy w wyświetlaniu typu flex, flex-col czyli w pionie opcja kolumn oraz przerwa miedzy nimi gap-2 - gap: 0.25rem; -->
+    <!-- teksty -->
+    <div class="flex flex-col gap-2">
+        <!-- customowa klasa card służąca jako tło do wszelkich teksów, custom-border moja własna klasa odpowiedzialna za obramowanie,
+    border-accent customowa klasa dodająca obramowanie w kolorze dodatkowym. p-2 tailwindowa klasa dajaca padding: 0.5rem; -->
+        <div class="p-2 card custom-border card-round border-accent">
+            <!-- tailwindowa klasa p-1 - padding: 0.25rem; -->
+            <p class="p-1">
+                Moim hobby a zarazem bardzo odstresowującym zajęciem jest oglądanie ekstraklasy. Oglądanie zmagań
+                gladiatorów polskiej ligi w piłce nożnej utwierdza mnie w nadziei, że nie trzeba być w czymś
+                mistrzemabyosiągnąć sukces. Kolejny aspekt to nuta komedii która jest zawarta w tej „śmiesznej”
+                lidze. Takie zwroty jak karuzela trenerska, czyli zwrot na ciągła wymianę trenerów w klubach
+                dobitnie ukazuje nam, ze coś jest nie tak.
+            </p>
+        </div>
+        <div class="p-2 card custom-border card-round border-accent">
+            <p class="p-1">
+                Kolejny aspekt to nieprzewidywalność tej ligi. Powiedzenie raz na wozie raz podwozem nabiera jeszcze
+                głębszego znaczenia w tej lidze. W sezonie 2023/2024 wicemistrzem został Śląsk Wrocław. Drużyna do
+                ostatniej kolejki biła się o tytuł mistrzowski z Jagiellonią Białystok, finalnie uzyskując tyle samo
+                punktów, ale przegrywając różnicą bramek. Po zaledwie paru miesiącach stan na październik 2024
+                wygląda tak, iż w nowym sezonie Śląsk jest przed ostatni i na dobrej drodze do spadku z ligi.
+            </p>
+        </div>
+    </div>
+    <!-- cześć elementów już była, ale standardowo mamy flex-col czyli pionowe elementy zaś od wielkości dużych ekranów już w linii
+    lg:flex-row, tak samo standardowe jest pozycjonowanie elementów between więc jak najdalej od siebie w większych ekranach zaś evenly czyli
+    w równych odstępach-->
+    <!-- obrazek i listy -->
+    <div class="flex flex-col items-center lg:flex-row justify-between lg:justify-evenly">
+        <!-- w-8/12	width: 66.666667%; -->
+        <div class="flex justify-center w-full lg:w-8/12 lg:justify-start">
+            <!-- list-max-w - customowa klasa na maksymalna szerokość listy -->
+            <div class="list-max-w">
+                <div class="p-2">
+                    <div class="p-2">
+                        <!-- text-2xl większy tekst dodatkowo powiększony i w kolorze dodatkowym z cieniem. -->
+                        <h3 class="text-2xl text-accent font-bold uppercase text-shadow">Najciekawsze zespoły
+                            grajace
+                            kiedyś w
+                            ekstraklasie to:</h3>
+                    </div>
+                    <!-- card-round także moja klasa do kontroli zagiecia rogów elementów -->
+                    <div class="p-4 card custom-border card-round border-accent">
+                        <!-- list-disc czyli tailwindowa kalsa do listy kropokowanej, p-4 padding wielkośći 1rem oraz mnieszy na górze i dole 0.5rem; -->
+                        <ul class="list-disc p-4 py-2">
+                            <li class="italic">
+                                Szczakowianka Jaworzno
+                            </li>
+                            <li class="italic">
+                                Ruch Radzionków
+                            </li>
+                            <li class="italic">
+                                Amica Wronki
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="p-2">
+                    <div class="p-2">
+                        <h3 class="text-2xl text-accent font-bold uppercase text-shadow">Ekstraklasę najlepieć
+                            obserować
+                            w:
+                        </h3>
+                    </div>
+                    <div class="p-4 card custom-border card-round border-accent max-h-[190px] content-center">
+                        <!-- list-deciaml - lista liczbowa -->
+                        <ul class="list-decimal p-4 py-2">
+                            <li>
+                                <div class="flex gap-5 items-center p-2">
+                                    <!-- niestandardowa szerokość custom-wid -->
+                                    <p class="custom-wid">Strona główna ekstraklasy</p>
+                                    <!-- jako linki do stron dałem eleganckie przyciski które przekierowują dalej.
+                                    maja one niestandardowe kolory dzięki bg-accent czyli kolor tła dodatkowy, tekst biały.
+                                    Warto zwrócić uwagę na klasę prime-button, jest to klasa która po nałożeniu maski hover, czyli nakierowaniu
+                                    myszką przybiera inne kolory. -->
+                                    <button class="prime-button bg-accent font-bold py-1 px-2 rounded text-sm"
+                                        onclick="redirectTo('https://ekstraklasa.org')">
+                                        Sprawdź
+                                    </button>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="flex gap-5 items-center p-2">
+                                    <p class="custom-wid">ekstraklasa TV</p>
+                                    <button class="prime-button bg-accent font-bold py-1 px-2 rounded text-sm"
+                                        onclick="redirectTo('https://ekstraklasa.tv')">
+                                        Sprawdź
+                                    </button>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="flex gap-5 items-center p-2">
+                                    <p class="custom-wid">Flashscore</p>
+                                    <button class="prime-button bg-accent font-bold py-1 px-2 rounded text-sm"
+                                        onclick="redirectTo('https://www.flashscore.pl/pilka-nozna/polska/pko-bp-ekstraklasa')">
+                                        Sprawdź
+                                    </button>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- obrazek z moimi klasami img-container (kontener służący do zagnieżdżenia obrazka), img-control (do ustawienia go w odpowieniej pozycji),
+        img-caption (podpis obrazka)  -->
+        <div id="img-wrapper" class="py-5 w-none h-full justify-center lg:w-1/2">
+            <div class="img-container">
+                <img class="img-control custom-border card-round border-accent" src="./images/image.png"
+                    alt="Opis obrazu">
+                <div class="p-2 card custom-border card-round border-accent img-caption">
+                    <p class="p-2">Logo ekstraklasy</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,269 @@
+html {
+    height: 100%;
+}
+
+/* kolory tła i ustawienia cznionki dla body */
+body {
+    background: var(--primary-color);
+    background: radial-gradient(circle, var(--color-primary) 0%, var(--color-accent) 96%);
+    font-family: 'Arial', sans-serif;
+    height: 100vh;
+    /* padding-bottom: 5rem; */
+}
+
+footer {
+    /* position: absolute; */
+    bottom: 0;
+    width: 100%;
+}
+
+/* moja kalsa kartki która służy jako główne tło tekstów */
+.card {
+    background-color: var(--color-static);
+    -webkit-box-shadow: inset 0px 0px 10px 2px var(--color-shadow), 5px 5px 10px 2px var(--color-shadow);
+    -moz-box-shadow: inset 0px 0px 10px 2px var(--color-shadow), 5px 5px 10px 2px var(--color-shadow);
+    box-shadow: inset 0px 0px 10px 2px var(--color-shadow), 5px 5px 10px 2px var(--color-shadow);
+}
+
+/* tło kolor podstawowy */
+.bg-primary {
+    background-color: var(--color-primary);
+}
+
+/* tło kolor dodatkowy*/
+.bg-accent {
+    background-color: var(--color-accent);
+}
+
+/* .bg-title {
+  background: radial-gradient(circle, rgba(255, 255, 255, 0) 0%, var(--color-primary) 50%, rgba(255, 255, 255, 0) 100%);
+  max-width: 300px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+} */
+/* tekst color-primary */
+.text-primary {
+    color: var(--color-primary);
+}
+
+/* tekst color-accent */
+.text-accent {
+    color: var(--color-accent);
+}
+
+.text-neutral {
+    color: var(--color-neutral);
+}
+
+/* obramowania kolor dodatkowy */
+.border-accent {
+    border-color: var(--color-accent);
+}
+
+/* kolor cienia podstawowy */
+.text-shadow {
+    text-shadow: 0px 0px 15px var(--color-primary);
+}
+
+.title-shadow {
+    color: var(--color-primary);
+    text-shadow:
+        3px 3px 5px var(--color-accent),
+        -3px -3px 5px var(--color-accent),
+        3px -3px 5px var(--color-accent),
+        -3px 3px 5px var(--color-accent);
+}
+
+/* teskt podstawowy po nacelowaniu */
+.text-primary:hover {
+    color: var(--color-static);
+}
+
+.text-primary-static {
+    color: var(--color-primary);
+}
+
+.prime-button {
+    color: var(--color-primary);
+}
+
+.prime-button:hover {
+    background-color: var(--color-primary);
+    color: var(--color-accent);
+}
+
+.alter-button {
+    background-color: var(--color-primary);
+    color: var(--color-accent);
+}
+
+.alter-button:hover {
+    background-color: var(--color-static);
+    color: var(--color-accent);
+}
+
+/* niestandardowe obramowania */
+.custom-border {
+    border-style: solid;
+    border-color: var(--color-accent);
+    border-width: 0.1rem;
+}
+
+/* obramowanie kolor podstawowy */
+.border-primary {
+    border-color: var(--color-primary);
+}
+
+/* zaokrąglenie kart na tekst */
+.card-round {
+    border-radius: 0.5rem;
+}
+
+/* niestaandardowa szerokość dla list */
+.custom-wid {
+    width: 250px;
+}
+
+/* konener na obrazek */
+.img-container {
+    position: relative;
+    display: inline-block;
+    width: 20rem;
+    height: 20rem;
+}
+
+/* wenętrzny konener dla obrazu */
+.img-control {
+    width: 20rem;
+    height: 20rem;
+    max-width: 20rem;
+    max-height: 20rem;
+    border-radius: 100%;
+    object-fit: cover;
+}
+
+/* kontener na podpis ustawimy go najpierw centralnie względem kontenera nadrzędnego left 50% i top 50%,
+następnie przesuwamy go względem jego własnej długości o -50% i 200% by był na środku i dole obrazka */
+.img-caption {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, 8rem);
+    width: 15rem;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+/* maksmyalna szerokość listy */
+.list-max-w {
+    max-width: 30rem;
+}
+
+/* klasa dla stopki */
+.footer {
+    width: 100%;
+    background-color: var(--color-accent);
+    color: var(--color-primary);
+    padding: 20px;
+    display: flex;
+    justify-content: space-evenly;
+    font-style: italic;
+}
+
+/* kolory hamburgera po najechaniu myszką */
+.menu-text:hover {
+    color: var(--color-static)
+}
+
+.menu-border:hover {
+    border-color: var(--color-static);
+}
+
+.gallery-containier {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-column-gap: 5rem;
+    grid-row-gap: 5rem;
+    justify-items: center;
+}
+
+.gallery-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+}
+
+#mobile-menu {
+    position: absolute;
+    z-index: 100;
+}
+
+.mobile-menu-box {
+    position: absolute;
+    top: 2rem;
+    left: -3.5rem;
+    width: 8rem;
+    background-color: var(--color-accent);
+}
+
+.form-container {
+    max-width: 28rem;
+    padding: 2rem;
+}
+
+.large-input {
+    display: block;
+    width: 100%;
+    padding: 1rem;
+    color: var(--color-accent);
+    border: 1px solid var(--color-accent);
+    border-radius: 0.5rem;
+    background-color: var(--color-static);
+    font-size: 1rem;
+}
+
+.custom-text {
+    color: white;
+    /* Kolor wnętrza tekstu (np. biały) */
+    text-shadow:
+        2px 2px 3px black,
+        -2px -2px 3px black,
+        2px -2px 3px black,
+        -2px 2px 3px black;
+}
+
+.outliner-color {
+}
+
+.outliner-color:focus {
+    border-color: var(--color-primary);
+}
+
+
+/* zmiana krawędzi przy mniejszej rozdzielczości, wiem że ten element będzie w lab2  jednak stworzyłem go nim zaponzałem się z wytycznymi dalszych zadań.
+będzie to rowijane. */
+@media screen and (max-width: 1024px) {
+    .custom-border {
+        border-style: dashed;
+        border-width: 0.1rem;
+    }
+
+    .gallery-containier {
+        grid-template-columns: repeat(2, 1fr);
+        padding-bottom: 4rem;
+    }
+
+    .title-container {
+        display: flex;
+        justify-content: center;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .gallery-containier {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}

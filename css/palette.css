@@ -1,0 +1,19 @@
+/* nawiązując trochę do takich sposobów tworzenia stron z użyciem sass czyli kaskadowych arkuszy styli 
+stworzyłem swoje zestawienie kolorów używanych w projekcie */
+
+:root {
+    /* kolor główny */
+    --color-primary: #5dffff;
+    /* kolor dodakowy */
+    --color-accent: #050b2a;
+    /* kolor tła tekstu */
+    --color-static: whitesmoke;
+    /* kolor cienia */
+    --color-shadow: #050b2a4d;
+    /* kolor neutralny szary */
+    --color-netural: #64646400;
+    /* kolor warning */
+    --color-warning: yellow;
+    /* kolor error */
+    --color-error: red;
+}
