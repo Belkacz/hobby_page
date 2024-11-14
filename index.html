@@ -1,0 +1,53 @@
+<!-- Autor Łukasz Belka, indeks 156162, grupa D1, Informatyka eksternistycznie, sezon 2024/2025 -->
+
+<!-- Słowem wstępu w związki iż w zadaniu można było posłużyć się fremworkiem poprawijącym stylistyke strony ja także taki wybrałem, natomaist zdecydowałem
+ się na Tilwind CSS. Jest to podobny do bootstrap frewmowrk zdobywający aktualnie dużą popularność. Uznałem że to dobry pomysł by trochę poćwiczyć jak on działa.
+ Oczywiście parałem się też customowymi CSS. Postara,m się też w komentarzach opisać najwżniejsze elemnty i do czego służą. 
+ Mamy tu 5 plików index.hmtl jako główny element strony, script.js skrypty JavaScript, style.css czyli główne style css i palette.css czyli wykaz kolorów -->
+
+<!DOCTYPE html>
+<html lang="pl">
+
+<!-- obszar head w którym mamy infomacje o stronie -->
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="desciption" content="Stronka o moim hobby">
+    <script src="./js/script.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="./css/style.css" rel="stylesheet">
+    <link href="./css/palette.css" rel="stylesheet">
+    <title>Moje hobby, Łukasz Belka idx. 156162</title>
+</head>
+
+<body>
+    <!-- navbar -->
+    <div id="nav-bar">
+
+    </div>
+    <!-- main-conteiner to pusta klasa która miał do czegoś służyć, ostatnie był dal mnie bardziej punktem nawigacyjnym
+     p-4 to mniejszy padding standardowy, lg:p14 to większy padding na większych ekranach -->
+
+    <!-- main -->
+     <div id="main"></div>
+
+</body>
+<footer id="footer1">
+    <!-- moja własna kalsa footer -->
+    <!-- <div class="footer">
+        <p>Autor: Łukasz Belka</p>
+        <p>październik 2024r.</p>
+        <button class="alter-button font-bold py-1 px-2 rounded text-sm" onclick="scrollToTop()">
+            Przenieś w górę
+        </button>
+    </div> -->
+</footer>
+
+</html>
+
+<!-- Podsumowując, korzystałem zarówno z elementów dostarczanych przez tailwind, ale też z własnych klas. W momencie jak wiedziałem, że dany element 
+ może wystąpić więcej razy i będę musiał go zmieniać globalnie decydowałem się na własne klasy. Przykład klasy card, wiedziałem że tekst będzie w kilku 
+ okach na jednolitym tle. W momencie jakbym chciał zmienić kolor tego tła ciężkie by było wyszukiwanie każdego elementu pojedynczo niż zmienianie każdemu 
+ bg-blue-500 na np. bg-red-100.  Własne klasy tworzyłem też kiedy musiałem dodać coś niestandardowego jak pozycjonowanie obrazku, dodawanie oddzielnie 
+ klas np. justify-center było bez sensu bo mogliśmy to zamknąć w klasie już istniejącej która była dedykowana dal elementu. -->
