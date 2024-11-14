@@ -181,6 +181,7 @@ następnie przesuwamy go względem jego własnej długości o -50% i 200% by by�
     border-color: var(--color-static);
 }
 
+/* lkontener obrazka w galerii */
 .gallery-containier {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -189,6 +190,7 @@ następnie przesuwamy go względem jego własnej długości o -50% i 200% by by�
     justify-items: center;
 }
 
+/* item w galerii */
 .gallery-item {
     display: flex;
     justify-content: center;
@@ -196,11 +198,13 @@ następnie przesuwamy go względem jego własnej długości o -50% i 200% by by�
     align-self: center;
 }
 
+/* element mobilenego menu z 100 by nie był pod obrazkami w galerii jak na nie najedzie */
 #mobile-menu {
     position: absolute;
     z-index: 100;
 }
 
+/* div w którym jest osadzone menu */
 .mobile-menu-box {
     position: absolute;
     top: 2rem;
@@ -214,6 +218,7 @@ następnie przesuwamy go względem jego własnej długości o -50% i 200% by by�
     padding: 2rem;
 }
 
+/* duże pole input */
 .large-input {
     display: block;
     width: 100%;
@@ -225,19 +230,7 @@ następnie przesuwamy go względem jego własnej długości o -50% i 200% by by�
     font-size: 1rem;
 }
 
-.custom-text {
-    color: white;
-    /* Kolor wnętrza tekstu (np. biały) */
-    text-shadow:
-        2px 2px 3px black,
-        -2px -2px 3px black,
-        2px -2px 3px black,
-        -2px 2px 3px black;
-}
-
-.outliner-color {
-}
-
+/* klasa do napisania podkreslenia w polach kontakt form na nasz kolor */
 .outliner-color:focus {
     border-color: var(--color-primary);
 }
@@ -251,6 +244,7 @@ będzie to rowijane. */
         border-width: 0.1rem;
     }
 
+    /* zmian galerii w śrenich ekranch na 2 kolumny */
     .gallery-containier {
         grid-template-columns: repeat(2, 1fr);
         padding-bottom: 4rem;
@@ -263,7 +257,44 @@ będzie to rowijane. */
 }
 
 @media screen and (max-width: 768px) {
+
+    /* zmiana galerii na 1 kolumnę przy małych ekranch */
     .gallery-containier {
         grid-template-columns: repeat(1, 1fr);
     }
+
+    /* ustawinie stopki w pionie na małych rozdzielczościach */
+    .footer {
+        flex-direction: column;
+    }
+
+    /* zmiana wszystkich dzieciw stopce na centrum i dodanie paddingu */
+    .footer>* {
+        padding: 10px;
+        display: flex;
+        justify-content: center;
+    }
+
+    .title {
+        text-align: center;
+    }
+
+    /* centrowanie rpzysiku na małych ekranch i pwoiekszenie go by łątwiej było kliknąć */
+    #submit-btn {
+        max-width: fit-content;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 15px;
+    }
+
+    /* pwoiekszenie napisów i margienesów na małym ekranie */
+    .line-input{
+        padding: 10px;
+        font-size: large!important;
+    }
+
+    .input-container {
+        margin-bottom: 1.5rem!important;
+    }
+    
 }

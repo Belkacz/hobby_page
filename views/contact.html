@@ -3,29 +3,33 @@
     <!-- tytuł -->
     <div class="p-5 px0 title-container">
         <!-- mamy tu większy tekst 4xl - font-size: 2.25rem; kolor dodatkowy, pogrubiony, podniesiony do wielkich liter i z cieniem. -->
-        <h1 class="text-4xl text-accent font-bold uppercase title-shadow ">Formularz Kontaktowy</h1>
+        <h1 class="text-4xl text-accent font-bold uppercase title title-shadow">Formularz Kontaktowy</h1>
     </div>
     <!-- formularz kontaktowy -->
     <div class="flex flex-col gap-2">
         <form id="contact-form" class="form-container card-round bg-accent" novalidate>
-            <div class="relative z-0 w-full mb-5 group">
-                <input type="name" name="input_name" id="input_name" class="block py-2.5 px-0 w-full text-sm text-primary-static
+            <div class="input-container relative z-0 w-full mb-5 group">
+                <input type="name" name="input_name" id="input_name" class="line-input block py-2.5 px-0 w-full text-sm text-primary-static
                     bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white
                     focus:outline-none focus:ring-0 outliner-color peer" placeholder="" required autoComplete="off"/>
-                <label for="input_name" class="peer-focus:font-medium absolute text-sm text-primary-static
+                    <!-- wyłaczyłem autocmplete bo jest to przerobiony (uszczuplony) formaulrz z tailwind, jednak autouzupełnienie dodawało tło koloru białego.
+                     szczerze nie udało mi się z tym upować próbowałem css napisać input z :automplete i focus ale to nic nie dawało prawodpobnie tailwind coś napisuje
+                     za pomocą bardziej szczegółowego selectora. Taki minus tych wszystkich bibliotek jak taliwnd czy bootstrap, korzystajac z gotowych modułów tracimy
+                     cześć kontroli. -->
+                <label for="input_name" class="input-label peer-focus:font-medium absolute text-sm text-primary-static
                     duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] 
-                    peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-primary-static
+                    rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-primary-static
                     peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 
                     peer-focus:scale-75 peer-focus:-translate-y-6">
                     Imię</label>
             </div>
-            <div class="relative z-0 w-full mb-5 group">
-                <input type="email" name="input_email" id="input_email" class="block py-2.5 px-0 w-full text-sm text-primary-static
+            <div class="input-container relative z-0 w-full mb-5 group">
+                <input type="email" name="input_email" id="input_email" class="line-input block py-2.5 px-0 w-full text-sm text-primary-static
                     bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white
                     focus:outline-none focus:ring-0 outliner-color peer" placeholder="" required autoComplete="off"/>
-                <label for="input_email" class="peer-focus:font-medium absolute text-sm text-primary-static
+                <label for="input_email" class="input-label peer-focus:font-medium absolute text-sm text-primary-static
                     duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] 
-                    peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-primary-static
+                    rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-primary-static
                     peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 
                     peer-focus:scale-75 peer-focus:-translate-y-6">
                     Adres e-mail</label>
@@ -38,8 +42,11 @@
 
                 </div>
             </div>
-            <button id="submit-btn" type="submit"
+            <div class="flex">
+                <button id="submit-btn" type="submit"
                 class="alter-button font-bold py-1 px-2 rounded text-sm cursor-not-allowed opacity-50">Wyślij</button>
+            </div>
+
         </form>
 
     </div>
