@@ -2,6 +2,13 @@ html {
     height: 100%;
 }
 
+a {
+    cursor: pointer;
+}
+
+#main {
+    padding-bottom: 4rem;
+}
 /* kolory tła i ustawienia cznionki dla body */
 body {
     background: var(--primary-color);
@@ -18,7 +25,7 @@ footer {
 }
 
 /* moja kalsa kartki która służy jako główne tło tekstów */
-.card {
+.card, .text-area {
     background-color: var(--color-static);
     -webkit-box-shadow: inset 0px 0px 10px 2px var(--color-shadow), 5px 5px 10px 2px var(--color-shadow);
     -moz-box-shadow: inset 0px 0px 10px 2px var(--color-shadow), 5px 5px 10px 2px var(--color-shadow);
@@ -80,6 +87,7 @@ footer {
     color: var(--color-static);
 }
 
+/* teskt podstawowy statyczny */
 .text-primary-static {
     color: var(--color-primary);
 }
@@ -93,6 +101,7 @@ footer {
     color: var(--color-accent);
 }
 
+/* alternatywny przcyisk */
 .alter-button {
     background-color: var(--color-primary);
     color: var(--color-accent);
@@ -116,7 +125,7 @@ footer {
 }
 
 /* zaokrąglenie kart na tekst */
-.card-round {
+.card-round, .text-area {
     border-radius: 0.5rem;
 }
 
@@ -170,6 +179,9 @@ następnie przesuwamy go względem jego własnej długości o -50% i 200% by by�
     display: flex;
     justify-content: space-evenly;
     font-style: italic;
+    position: fixed;
+    bottom: 0;
+    left: 0;
 }
 
 /* kolory hamburgera po najechaniu myszką */
@@ -214,7 +226,7 @@ następnie przesuwamy go względem jego własnej długości o -50% i 200% by by�
 }
 
 .form-container {
-    max-width: 28rem;
+    max-width: 50rem;
     padding: 2rem;
 }
 
@@ -223,10 +235,9 @@ następnie przesuwamy go względem jego własnej długości o -50% i 200% by by�
     display: block;
     width: 100%;
     padding: 1rem;
-    color: var(--color-accent);
     border: 1px solid var(--color-accent);
     border-radius: 0.5rem;
-    background-color: var(--color-static);
+    background-color: var(--color-static-dark);
     font-size: 1rem;
 }
 
@@ -254,9 +265,16 @@ będzie to rowijane. */
         display: flex;
         justify-content: center;
     }
+
+
 }
 
 @media screen and (max-width: 768px) {
+
+    /* ograniczenie wielkosci formularza na mniejszych erkanach */
+    .form-container {
+        max-width: 28rem;
+    }
 
     /* zmiana galerii na 1 kolumnę przy małych ekranch */
     .gallery-containier {
@@ -287,7 +305,7 @@ będzie to rowijane. */
         padding: 15px;
     }
 
-    /* pwoiekszenie napisów i margienesów na małym ekranie */
+    /* powiększenie napisów i margienesów na małym ekranie */
     .line-input{
         padding: 10px;
         font-size: large!important;

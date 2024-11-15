@@ -7,7 +7,9 @@ stworzyłem swoje zestawienie kolorów używanych w projekcie */
     /* kolor dodakowy */
     --color-accent: #050b2a;
     /* kolor tła tekstu */
-    --color-static: whitesmoke;
+    --color-static: #f5f5f5;
+    /* kolor tła tekstu ciemny */
+    --color-static-dark: #1f252e;
     /* kolor cienia */
     --color-shadow: #050b2a4d;
     /* kolor neutralny szary */

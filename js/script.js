@@ -8,7 +8,7 @@ function redirectTo(url) {
 // funkcja która wycina nam pcozatek adresu do ostatniego znaku '/' a następnie dodaje nowy endpoint po #
 function redirectToSubPage(destination, event) {
     event.preventDefault() // blokujemy przełdowanie by nie było efektu klimay przenosi nas na strone #<nazwa_sub_domeny> a następnie stona się odświerza i znów
-                            // trafiamy na stonę domową bez #
+    // trafiamy na stonę domową bez #
     const path = window.location.pathname;
     if (destination == '' || destination == null || destination == undefined) { // przy pusty endponcie wróć na stornę główną
         window.location.href = path
@@ -58,10 +58,11 @@ async function sendContact(data, form) {
         });
 
         if (response.ok) {
-            alert("Twój formualrz został wysłany :)");
+            alert("Twój formularz został wysłany :)");
             form.reset();
+            checkSubmitButton();
         } else {
-            alert("Błąd w trakcie wysyłania formualrza.");
+            alert("Błąd w trakcie wysyłania formularza.");
         }
     } catch (error) {
         console.error("Błąd:", error);
@@ -69,17 +70,89 @@ async function sendContact(data, form) {
     }
 }
 
-// funkcja inicjująca validatory formularza i blokująca przycisk wyślij. Musi to być tu wyciągniete byśmy nie próbowali złpać inputów gdy ich nie ma
-// na innych stronach. Daltego też właczamy to gdy jesteśmy pod adresem zakończonym #contact
-function initiateContactForm() {
-    const form = document.getElementById("contact-form");
-
+function checkSubmitButton() {
     const validationMsg = document.getElementById("validation-msg");
     const name = document.getElementById("input_name");
     const eMail = document.getElementById("input_email");
     const largeInput = document.getElementById("large-input")
     const submitBtn = document.getElementById("submit-btn")
 
+    const hasErrors = validationMsg.children.length > 0;
+    const isNameEmpty = name.value.trim() === "";
+    const isEmailEmpty = eMail.value.trim() === "";
+    const isLargeInputEmpty = largeInput.value.trim() === "";
+
+    if (hasErrors || isNameEmpty || isEmailEmpty || isLargeInputEmpty) {
+        submitBtn.classList.add("cursor-not-allowed", "opacity-50");
+        submitBtn.disabled = true;
+    } else {
+        submitBtn.classList.remove("cursor-not-allowed", "opacity-50");
+        submitBtn.disabled = false;
+    }
+}
+
+// walidator czy pole jest puste, abstrakcyjny trochę by był dla każadego pola
+function validateEmpty(field, fieldError, filedName, validationMsg) {
+    if (field.value.trim() === "") {
+        fieldError.innerText = `Pole ${filedName} nie może być puste.`;
+        fieldError.style.cssText = errorMsgCss;
+        validationMsg.appendChild(fieldError);
+    } else {
+        if (validationMsg.contains(fieldError)) {
+            validationMsg.removeChild(fieldError);
+        }
+    }
+    checkSubmitButton();
+}
+
+function emailValidator(validationMsg, errorEmailMsgMonke, errorEmailMsgDot) {
+    const trimmedEmail = document.getElementById("input_email").value.trim();
+    // const errorEmailMsgMonke = document.createElement("p");
+    // const errorEmailMsgDot = document.createElement("p");
+
+    if (!trimmedEmail.includes("@")) {
+        errorEmailMsgMonke.innerText = "Pole email musi zawierać znak @.";
+        errorEmailMsgMonke.style.cssText = errorMsgCss;
+        validationMsg.appendChild(errorEmailMsgMonke);
+    } else if (trimmedEmail.slice(0, 1) == '@') {
+        errorEmailMsgMonke.innerText = "Pole email nie może zaczynać się od znaku @.";
+        errorEmailMsgMonke.style.cssText = errorMsgCss;
+        validationMsg.appendChild(errorEmailMsgMonke);
+    } else {
+        if (validationMsg.contains(errorEmailMsgMonke)) {
+            validationMsg.removeChild(errorEmailMsgMonke);
+        }
+    }
+    errorEmailMsgDot.style.cssText = errorMsgCss;
+    if (!trimmedEmail.includes(".")) {
+        errorEmailMsgDot.innerText = "Pole email musi zawierać znak kropka - '.' .";
+        validationMsg.appendChild(errorEmailMsgDot);
+    } else if (trimmedEmail.slice(-1) == '.') {
+        errorEmailMsgDot.innerText = "Pole email nie może mieć znaku '.' - kropka na końcu.";
+        validationMsg.appendChild(errorEmailMsgDot);
+    } else if (trimmedEmail.charAt(trimmedEmail.indexOf('@') + 1) == '.') {
+        errorEmailMsgDot.innerText = "Pole email nie może zawierać znaku . bezpośrednio po znaku @.";
+        validationMsg.appendChild(errorEmailMsgDot);
+    } else {
+        if (validationMsg.contains(errorEmailMsgDot)) {
+            validationMsg.removeChild(errorEmailMsgDot);
+        }
+    }
+    // sprawdzanie blokady przycisku wyślij
+    checkSubmitButton();
+}
+
+// funkcja inicjująca validatory formularza i blokująca pośrednio przycisk wyślij. Musi to być tu wyciągniete byśmy nie próbowali złpać inputów gdy ich nie ma
+// na innych stronach. Daltego też właczamy to gdy jesteśmy pod adresem zakończonym #contact
+function initiateContactForm() {
+
+    // deklarrownie zmiennych które przekażemy walidatorom
+    const form = document.getElementById("contact-form");
+
+    const validationMsg = document.getElementById("validation-msg");
+    const name = document.getElementById("input_name");
+    const eMail = document.getElementById("input_email");
+    const largeInput = document.getElementById("large-input")
 
     const errorNameMsg = document.createElement("p");
     const errorEmailMsg = document.createElement("p");
@@ -87,83 +160,17 @@ function initiateContactForm() {
     const errorEmailMsgDot = document.createElement("p");
     const errorLargeInput = document.createElement("p");
 
-    // walidatorów e mail, delkaracje walidatorów powinny być wyciągniete z ciała funkcji initaiteContactForm, zaś elementy jak errorNameMsg, errorEmailMsg, name itd.
-    // mogłyby być przekazywane jako argument funkcji jednak biorąc pod uwagę że każdy z tych walidatorów włącza i uruchamiana sprawdzenie przycisku checkSubmitButton();
-    // musielibyś też propgaować im te elementy lub twożyć/ łapać QerrySelectorem ten przycisk na nowo, w wyniku czego może nam powstać większe spaghetti niż tego
-    // oczekujemy
-    function emailValidator() {
-        const trimmedEmail = eMail.value.trim();
-        if (!trimmedEmail.includes("@")) {
-            errorEmailMsgMonke.innerText = "Pole email musi zawierać znak @.";
-            errorEmailMsgMonke.style.cssText = errorMsgCss;
-            validationMsg.appendChild(errorEmailMsgMonke);
-        } else if (trimmedEmail.slice(0, 1) == '@') {
-            errorEmailMsgMonke.innerText = "Pole email nie może zaczynać się od znaku @.";
-            errorEmailMsgMonke.style.cssText = errorMsgCss;
-            validationMsg.appendChild(errorEmailMsgMonke);
-        } else {
-            if (validationMsg.contains(errorEmailMsgMonke)) {
-                validationMsg.removeChild(errorEmailMsgMonke);
-            }
-        }
-        errorEmailMsgDot.style.cssText = errorMsgCss;
-        if (!trimmedEmail.includes(".")) {
-            errorEmailMsgDot.innerText = "Pole email musi zawierać znak kropka - '.' .";
-            validationMsg.appendChild(errorEmailMsgDot);
-        } else if (trimmedEmail.slice(-1) == '.') {
-            errorEmailMsgDot.innerText = "Pole email nie może mieć znaku '.' - kropka na końcu.";
-            validationMsg.appendChild(errorEmailMsgDot);
-        } else if (trimmedEmail.charAt(trimmedEmail.indexOf('@') + 1) == '.') {
-            errorEmailMsgDot.innerText = "Pole email nie może zawierać znaku . bezpośrednio po znaku @.";
-            validationMsg.appendChild(errorEmailMsgDot);
-        } else {
-            if (validationMsg.contains(errorEmailMsgDot)) {
-                validationMsg.removeChild(errorEmailMsgDot);
-            }
-        }
-        // sprawdzanie blokady przycisku wyślij
-        checkSubmitButton();
-    }
-
-    // walidator czy pole jest puste, abstrakcyjny trochę by był dla każadego pola
-    function validateEmpty(field, fieldError, filedName) {
-        if (field.value.trim() === "") {
-            fieldError.innerText = `Pole ${filedName} nie może być puste.`;
-            fieldError.style.cssText = errorMsgCss;
-            validationMsg.appendChild(fieldError);
-        } else {
-            if (validationMsg.contains(fieldError)) {
-                validationMsg.removeChild(fieldError);
-            }
-        }
-        checkSubmitButton();
-    }
-
-    // no funkcja blokująca lub odblowywująca przycisk
-    function checkSubmitButton() {
-        const hasErrors = validationMsg.children.length > 0;
-        const isNameEmpty = name.value.trim() === "";
-        const isEmailEmpty = eMail.value.trim() === "";
-        const isLargeInputEmpty = largeInput.value.trim() === "";
-
-        if (hasErrors || isNameEmpty || isEmailEmpty || isLargeInputEmpty) {
-            submitBtn.classList.add("cursor-not-allowed", "opacity-50");
-            submitBtn.disabled = true;
-        } else {
-            submitBtn.classList.remove("cursor-not-allowed", "opacity-50");
-            submitBtn.disabled = false;
-        }
-    }
-
+    //tutaj uruchamiamy walidatory
     name.addEventListener("input", () => {
-        validateEmpty(name, errorNameMsg, "imię");
+        validateEmpty(name, errorNameMsg, "imię", validationMsg);
     });
     eMail.addEventListener("input", () => {
-        validateEmpty(eMail, errorEmailMsg, "email");
+        emailValidator(validationMsg, errorEmailMsgMonke, errorEmailMsgDot);
+        validateEmpty(eMail, errorEmailMsg, "email", validationMsg);
     });
-    eMail.addEventListener("input", emailValidator);
+    // eMail.addEventListener("input", emailValidator);
     largeInput.addEventListener("input", () => {
-        validateEmpty(largeInput, errorLargeInput, "wiadomości");
+        validateEmpty(largeInput, errorLargeInput, "wiadomości", validationMsg);
     });
 
     // event na przycisk submit naszego formularza
