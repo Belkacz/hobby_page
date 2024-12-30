@@ -1,4 +1,6 @@
 const express = require('express');
+const mysql = require('mysql2');
+
 const fs = require('fs');
 const path = require('path');
 const app = express();
@@ -10,12 +12,45 @@ app.use(cors());
 
 app.use(express.json());
 
+
+// dane bazy
+const db = mysql.createConnection({
+  host: 'localhost',
+  user: 'tech_web',
+  password: 'tech_web1',
+  database: 'my_hobby',
+  port: "3306"
+});
+
+// połączenie z bazą
+db.connect(err => {
+  if (err) {
+    console.error('Błąd podczas łączenia z bazą danych:', err.message);
+    return;
+  }
+  console.log('Połączono z bazą danych.');
+});
+
+
 // odebranie z post fomualrza kontaktowego.
 app.post('/save-contact', (req, res) => {
   const { name, email, message } = req.body;
   console.log("Server odebrał i jest gotowy do wysłania danych:");
   console.log(`nazwa: ${name}\nemail: ${email}\nwiadomość: ${message}`);
-  res.json({ message: "Formularz został zapisany!" });
+
+  const query = 'INSERT INTO contact_requests (name, email, message) VALUES (?, ?, ?)';
+  const values = [name, email, message];
+
+  // dodałem zapisywanie do bazy
+  db.query(query, values, (err, result) => {
+    if (err) {
+      console.error('Błąd podczas zapisywania danych do bazy:', err);
+      return res.status(500).json({ error: 'Wystąpił błąd podczas zapisywania danych.' });
+    }
+
+    console.log('Dane zostały zapisane w bazie:', result);
+    res.json({ message: 'Formularz został zapisany!' });
+  });
 });
 
 // zwrócienie na get navbarku strony
@@ -76,6 +111,20 @@ app.get('/contact', (req, res) => {
       return;
     }
     res.send(data);
+  });
+});
+
+app.get('/contact-list', (req, res) => {
+  const query = 'SELECT * FROM contact_requests';
+
+  db.query(query, (err, results) => {
+    if (err) {
+      console.error('Błąd podczas pobierania danych z bazy:', err);
+      return res.status(500).json({ error: 'Wystąpił błąd podczas pobierania danych.' });
+    }
+
+    // Zwracamy dane w formacie JSON
+    res.json(results);
   });
 });
 

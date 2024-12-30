@@ -61,6 +61,10 @@ async function sendContact(data, form) {
             alert("Twój formularz został wysłany :)");
             form.reset();
             checkSubmitButton();
+            const htmlContactList = document.getElementById("contact-list");
+            if(htmlContactList && htmlContactList != undefined) {
+                getContactList(htmlContactList);
+            }
         } else {
             alert("Błąd w trakcie wysyłania formularza.");
         }
@@ -188,6 +192,43 @@ function initiateContactForm() {
     });
 }
 
+async function getContactList(htmlContactList) {
+    try {
+        htmlContactList.innerHTML = 'Ładowanie';
+        // to można by rozhardkodować i trzymać endpoint i komunikat w zmiennych
+        const contactDataResponse = await fetch(`http://localhost:3000/contact-list`);
+
+        if(!contactDataResponse.ok) {
+            throw new Error(`Error: ${response.status}`);
+        }
+        const contactData = await contactDataResponse.json();
+    
+        if (contactData && contactData.length > 0) {
+            htmlContactList.innerHTML = '';
+            // Tworzenie listy HTML
+            const ul = document.createElement('ul');
+            ul.classList.add('list-disc', 'p-4', 'py-2'); // klasy TailwindCSS
+            // Dodawanie elementów do listy
+            contactData.forEach(contact => {
+                const date = new Date(contact.date);
+                const formattedDate = date.toLocaleString();
+                const li = document.createElement('li');
+                li.classList.add('italic'); // klasy TailwindCSS
+                li.textContent = `Wiadomość od ${contact.name} z ${formattedDate}: ${contact.message}`;
+                ul.appendChild(li);
+            });
+
+            // Dodanie listy do kontenera
+            htmlContactList.appendChild(ul);
+        } else {
+            // Obsługa przypadku, gdy lista jest pusta
+            htmlContactList.innerHTML = '<p>No contacts found.</p>';
+        }
+    } catch (error) {
+        console.log(error)
+    }
+}
+
 // funkcja wstrzykujaca załadowane dane
 async function setLoadedData(elementName, div) {
     // blok catch try do łapania błędów
@@ -203,8 +244,12 @@ async function setLoadedData(elementName, div) {
         // sprawdzenie czy mamy podstonę #contact i zainicjowanie walidatorów formualrza
         if (elementName === "contact") {
             const form = document.getElementById("contact-form");
-            if (form) {
+            if (form && form != undefined) {
                 initiateContactForm();
+            }
+            const htmlContactList = document.getElementById("contact-list");
+            if(htmlContactList && htmlContactList != undefined) {
+                getContactList(htmlContactList);
             }
         }
     } catch (error) { // wrzucenie error komunikatu w dany blok jeśli się nie załaduje
