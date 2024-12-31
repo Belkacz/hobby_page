@@ -1,3 +1,4 @@
+const serverAdress = "http://localhost:3000"
 const errorMsgCss = "color: red; var(--color-error); padding: 10px 0px 10px 0px";
 
 // prosty skrypt przekierowujący dzięki niemu możemy przejść do linków dzięki przyciskom na które klikniemy a nie stylizowanym kotwicą w divie
@@ -49,7 +50,7 @@ function toggleMobileMenuVisibility() {
 // asynchroniczbna funkcja do wysyłania informacji z formualrz kontaktowego
 async function sendContact(data, form) {
     try {
-        const response = await fetch("http://localhost:3000/save-contact", {
+        const response = await fetch(`${serverAdress}/save-contact`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -196,7 +197,7 @@ async function getContactList(htmlContactList) {
     try {
         htmlContactList.innerHTML = 'Ładowanie';
         // to można by rozhardkodować i trzymać endpoint i komunikat w zmiennych
-        const contactDataResponse = await fetch(`http://localhost:3000/contact-list`);
+        const contactDataResponse = await fetch(`${serverAdress}/contact-list`);
 
         if(!contactDataResponse.ok) {
             throw new Error(`Error: ${response.status}`);
@@ -233,7 +234,7 @@ async function getContactList(htmlContactList) {
 async function setLoadedData(elementName, div) {
     // blok catch try do łapania błędów
     try {
-        const response = await fetch(`http://localhost:3000/${elementName}`);
+        const response = await fetch(`${serverAdress}/${elementName}`);
 
         if (!response.ok) {
             throw new Error(`Error: ${response.status}`);
